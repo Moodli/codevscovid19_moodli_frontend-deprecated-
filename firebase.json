@@ -1,0 +1,49 @@
+{
+  "functions": {
+    "source": "dist/functions",
+    "predeploy": [
+      "npm run clean",
+      "npm run lint:functions",
+      "npm run lint:app",
+      "npm run typecheck-app",
+      "npm run build:functions",
+      "npm run build:app",
+      "npm run copy-deps",
+      "npm run install-deps"
+    ]
+  },
+  "hosting": {
+    "public": "dist/public",
+    "headers": [
+      {
+        "source": "/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=604800"
+          }
+        ]
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**/**",
+        "function": "nextApp",
+        "run": {
+          "region": "europe-west3"
+        }
+      }
+    ],
+    "predeploy": "npm run build:public"
+  }
+}
