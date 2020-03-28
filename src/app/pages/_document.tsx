@@ -63,6 +63,10 @@ class PmmDocument extends Document {
           {/* PWA primary color */}
           <meta name='theme-color' content={theme.palette.primary.main} />
           <link
+            href='https://api.mapbox.com/mapbox-assembly/mbx/v0.18.0/assembly.min.css'
+            rel='stylesheet'
+          />
+          <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Sen:300,400,500,700&display=swap'
           />
@@ -75,6 +79,7 @@ class PmmDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script src='https://api.mapbox.com/mapbox-assembly/mbx/v0.18.0/assembly.js' />
         </body>
       </html>
     );

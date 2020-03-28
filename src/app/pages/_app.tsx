@@ -15,13 +15,11 @@ interface ImoodliAppProps {
 
 interface ImoodliAppState {
   mobileOpen: boolean;
-  user: firebase.User;
 }
 
 class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
   public state = {
-    mobileOpen: false,
-    user: null
+    mobileOpen: false
   };
 
   public componentDidMount() {
@@ -37,8 +35,6 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
 
   public render() {
     const { Component, pageProps, classes, router } = this.props;
-    const user = this.state.user;
-
     return (
       <>
         <Head>
@@ -66,11 +62,7 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
               </Hidden>
             </nav>
             <div className={classes.appContent}>
-              <Header
-                title='moodli'
-                onDrawerToggle={this.handleDrawerToggle}
-                user={user}
-              />
+              <Header title='moodli' onDrawerToggle={this.handleDrawerToggle} />
               <main className={classes.mainContent}>
                 <Component {...pageProps} />
               </main>
