@@ -3,7 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import React from 'react';
 import theme from '../ui-components/theme';
 
-class PmmDocument extends Document {
+class MoodliDocument extends Document {
   public static async getInitialProps(ctx) {
     // Resolution order
     //
@@ -62,18 +62,26 @@ class PmmDocument extends Document {
           />
           {/* PWA primary color */}
           <meta name='theme-color' content={theme.palette.primary.main} />
+          <meta
+            name='viewport'
+            content='initial-scale=1,maximum-scale=1,user-scalable=no'
+          />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css?family=Sen:400&display=swap'
+          />
+          <link
+            href='https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css'
+            rel='stylesheet'
+          />
           <link
             href='https://api.mapbox.com/mapbox-assembly/mbx/v0.18.0/assembly.min.css'
             rel='stylesheet'
           />
           <link
             rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Sen:300,400,500,700&display=swap'
-          />
-          <script async={true} src='//platform.twitter.com/widgets.js' />
-          <link
-            href='//api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css'
-            rel='stylesheet'
+            href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css'
+            type='text/css'
           />
         </Head>
         <body>
@@ -86,4 +94,4 @@ class PmmDocument extends Document {
   }
 }
 
-export default PmmDocument;
+export default MoodliDocument;

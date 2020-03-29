@@ -1,13 +1,11 @@
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
 import React, { useState } from 'react';
 import { styles } from './header.css';
+
+const logo = require('../../assets/logo.svg');
 
 interface IHeaderProps {
   title: string;
@@ -28,10 +26,10 @@ const Header = ({ title, classes, onDrawerToggle }: IHeaderProps) => {
 
   return (
     <React.Fragment>
-      <AppBar color='primary' position='sticky' elevation={0}>
+      <AppBar elevation={0} className={classes.appBar}>
         <Toolbar>
           <Grid container={true} spacing={1} alignItems='center'>
-            <Hidden smUp={true}>
+            {/* <Hidden smUp={true}>
               <Grid item={true}>
                 <IconButton
                   color='inherit'
@@ -42,22 +40,17 @@ const Header = ({ title, classes, onDrawerToggle }: IHeaderProps) => {
                   <MenuIcon />
                 </IconButton>
               </Grid>
-            </Hidden>
+            </Hidden> */}
             <Grid item={true} xs={true}>
-              <Typography color='inherit' variant='h5' component='h1'>
-                {title}
-              </Typography>
+              <img src={logo} alt='Logo' className={classes.logo} />
+              <br />
+              <span style={{ fontStyle: 'italic', color: 'grey' }}>
+                World mood map
+              </span>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppBar
-        component='div'
-        className={classes.secondaryBar}
-        color='primary'
-        position='static'
-        elevation={0}
-      />
     </React.Fragment>
   );
 };

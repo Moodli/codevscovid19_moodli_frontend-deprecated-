@@ -1,58 +1,139 @@
-import { withStyles } from '@material-ui/core/styles';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { withStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import * as GeoJSON from 'geojson';
 import mapboxgl from 'mapbox-gl';
 import React, { Component } from 'react';
 import { styles } from './map.css';
 
 mapboxgl.accessToken =
-  'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
+  'pk.eyJ1IjoiYXJ0ZGF3IiwiYSI6ImNrOGFzODg0MTA1M3MzZm1qMTAxNjJ6bjEifQ.CDaURiTGZYvrUNSspris3Q';
 
 interface MapState {
-  lng: number;
-  lat: number;
+  center: GeoJSON.Feature;
   zoom: number;
 }
 
-class Map extends Component<{}, MapState> {
+interface MapProps {
+  center: GeoJSON.Feature;
+  data: GeoJSON.FeatureCollection;
+  classes?: any;
+}
+
+class Map extends Component<MapProps, MapState> {
   mapRef = React.createRef<HTMLDivElement>();
 
   constructor(props: any) {
     super(props);
+    const { center } = this.props;
     this.state = {
-      lng: 5,
-      lat: 34,
-      zoom: 1.5
+      center,
+      zoom: 3
     };
   }
 
   componentDidMount() {
+    const data = this.props.data;
+
+    const geoPoint = {
+      lng: this.state.center ? this.state.center.geometry.coordinates[0] : 0,
+      lat: this.state.center ? this.state.center.geometry.coordinates[1] : 0
+    };
     const map = new mapboxgl.Map({
       container: this.mapRef.current,
-      style: 'mapbox://styles/mapbox/streets-v9',
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
+      style: 'mapbox://styles/mapbox/light-v10',
+      center: geoPoint,
+      zoom: 1
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      }),
+      'bottom-right'
+    );
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl
+      }),
+      'top-right'
+    );
+    map.flyTo({
+      center: geoPoint,
+      zoom: 6,
+      bearing: 0,
+      speed: 1, // make the flying slow
+      curve: 1, // change the speed at which it zooms out
+      essential: true
     });
 
-    map.on('move', () => {
-      const { lng, lat } = map.getCenter();
+    map.on('load', () => {
+      map.addSource('points', {
+        type: 'geojson',
+        data
+      });
 
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
+      map.addLayer({
+        id: 'moods-circles',
+        type: 'circle',
+        source: 'points',
+        paint: {
+          'circle-color': [
+            'interpolate',
+            ['linear'],
+            ['get', 'sentiment'],
+            -0.0,
+            '#ff0000',
+            0.5,
+            'yellow',
+            0.7,
+            'green'
+          ],
+          // 'circle-radius': {
+          //   base: 1.75,
+          //   stops: [
+          //     [12, 2],
+          //     [22, 180]
+          //   ]
+          // },
+          'circle-opacity': 0.5
+          // 'circle-radius': [
+          //   'interpolate',
+          //   ['linear'],
+          //   ['get', 'sentiment'],
+          //   6,
+          //   20,
+          //   8,
+          //   40
+          // ]
+        }
       });
     });
   }
 
   render() {
-    const { lng, lat, zoom } = this.state;
+    const classes = this.props.classes;
 
     return (
-      <div>
-        <div className='inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold'>
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+      <>
+        <div ref={this.mapRef} className={clsx('absolute', classes.map)} />
+        <div className={clsx('absolute', classes.mapOverlay)}>
+          <div className={classes.mapOverlayInner}>
+            <div>
+              <div className={classes.mapOverlayLegendBar} />
+              <div className={classes.mapEmojiesContainer}>
+                <span>😀</span>
+                <span>😐</span>
+                <span>🙁</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div ref={this.mapRef} className='absolute top right left bottom' />
-      </div>
+      </>
     );
   }
 }

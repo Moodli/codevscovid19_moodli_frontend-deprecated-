@@ -4,7 +4,6 @@ import {
   makeStyles
 } from '@material-ui/core/styles';
 
-export const yellow = '#F5DB00';
 export const white = '#ffffff';
 export const spacing = {
   xs: 12,
@@ -41,9 +40,6 @@ let theme = createMuiTheme({
   palette: {
     primary: {
       main: white
-    },
-    secondary: {
-      main: yellow
     }
   },
   shape: {
@@ -130,7 +126,6 @@ export const cardStyles = makeStyles(() =>
 export const drawerWidth = 256;
 export const appStyles = createStyles({
   root: {
-    background: white,
     display: 'flex',
     minHeight: '100vh'
   },
@@ -146,31 +141,19 @@ export const appStyles = createStyles({
     flexDirection: 'column'
   },
   mainContent: {
-    flex: 1
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    position: 'relative'
   }
 });
 
 export const landingStyles = createStyles({
-  root: {
-    paddingLeft: spacing.l,
-    paddingRight: spacing.l
-  },
-  h1: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: pxToRem(150)
-    }
-  },
-  h2: {
-    marginTop: spacing.l,
-    textAlign: 'center',
-    [theme.breakpoints.up('sm')]: {
-      textAlign: 'left'
-    }
-  },
-  footer: {
-    paddingLeft: spacing.l,
-    paddingRight: spacing.l,
-    paddingBottom: spacing.l
+  loader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
   }
 });
 

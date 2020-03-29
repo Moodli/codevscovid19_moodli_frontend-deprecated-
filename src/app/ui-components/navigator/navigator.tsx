@@ -12,13 +12,14 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { styles } from './navigator.css';
+const logo = require('../../assets/logo.svg');
 
 const categories = [
   {
     id: 'Dashboard',
     children: [
       { id: 'Map', icon: <MapIcon />, path: '/' },
-      { id: 'Analytics', icon: <SettingsIcon /> }
+      { id: 'Analytics', icon: <SettingsIcon />, path: '/' }
     ]
   }
 ];
@@ -47,7 +48,7 @@ function Navigator(props: INavigatorProps) {
               classes.itemCategory
             )}
           >
-            moodli
+            <img src={logo} alt='Logo' style={{ maxHeight: '50px' }} />
           </ListItem>
         </Link>
         {categories.map(({ id, children }) => (

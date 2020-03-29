@@ -5,26 +5,15 @@ const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 export const styles = (theme: Theme) => ({
   appBar: {
-    paddingTop: spacing.l,
-    paddingBottom: spacing.l,
-    paddingLeft: spacing.xs   
+    background:
+      'linear-gradient(to bottom, rgba(125,125,125,1) 0%, rgba(125,125,125, 0.50) 25%, rgba(255,255,255,0) 100%)',
+    paddingTop: spacing.xs,
+    paddingLeft: spacing.xs
   },
-  secondaryBar: {
-    zIndex: 0,
+  logo: {
+    maxHeight: '40px'
   },
   menuButton: {
-    marginLeft: -theme.spacing(1),
-  },
-  iconButtonAvatar: {
-    padding: 4,
-  },
-  link: {
-    'color': lightColor,
-    '&:hover': {
-      color: theme.palette.common.white,
-    },
-  },
-  button: {
-    borderColor: lightColor,
-  },
+    marginLeft: -theme.spacing(1)
+  }
 });

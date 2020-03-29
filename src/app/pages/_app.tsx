@@ -1,13 +1,11 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Hidden from '@material-ui/core/Hidden';
 import { ThemeProvider, withStyles } from '@material-ui/styles';
 import App from 'next/app';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
 import React from 'react';
 import Header from '../ui-components/header/header';
-import Navigator from '../ui-components/navigator/navigator';
-import theme, { appStyles, drawerWidth } from '../ui-components/theme';
+import theme, { appStyles } from '../ui-components/theme';
 
 interface ImoodliAppProps {
   classes: any;
@@ -44,7 +42,7 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <div className={classes.root}>
             <CssBaseline />
-            <nav className={classes.drawer}>
+            {/* <nav className={classes.drawer}>
               <Hidden smUp={true} implementation='js'>
                 <Navigator
                   PaperProps={{ style: { width: drawerWidth } }}
@@ -60,7 +58,7 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
                   route={router.route}
                 />
               </Hidden>
-            </nav>
+            </nav> */}
             <div className={classes.appContent}>
               <Header title='moodli' onDrawerToggle={this.handleDrawerToggle} />
               <main className={classes.mainContent}>
