@@ -41,7 +41,7 @@ class Map extends Component<MapProps, MapState> {
     };
     const map = new mapboxgl.Map({
       container: this.mapRef.current,
-      style: 'mapbox://styles/mapbox/light-v10',
+      style: 'mapbox://styles/mapbox/dark-v10',
       center: geoPoint,
       zoom: 1
     });
