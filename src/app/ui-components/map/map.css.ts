@@ -12,6 +12,11 @@ export const styles = (theme: Theme) => ({
       '& .mapboxgl-ctrl': {
         clear: 'left'
       }
+    },
+    '@media (min-width:320px)': {
+      '& .mapboxgl-ctrl-top-right': {
+        left: '20px'
+      }
     }
   },
   mapOverlay: {

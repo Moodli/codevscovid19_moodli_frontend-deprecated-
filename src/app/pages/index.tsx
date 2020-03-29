@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import { landingStyles } from '../ui-components/theme';
 
-const logo = require('../assets/logo.svg');
 const data = require('../dataset.json');
 const Map = dynamic(() => import('../ui-components/map/map'), { ssr: false });
 

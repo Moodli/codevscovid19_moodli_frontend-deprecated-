@@ -1,3 +1,4 @@
+import { Hidden } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -41,12 +42,14 @@ const Header = ({ title, classes, onDrawerToggle }: IHeaderProps) => {
                 </IconButton>
               </Grid>
             </Hidden> */}
-            <Grid item={true} xs={true}>
-              <img src={logo} alt='Logo' className={classes.logo} />
-              <br />
-              <span style={{ fontStyle: 'italic', color: 'grey' }}>
-                World mood map
-              </span>
+            <Grid item={true} xs={false}>
+              <Hidden xsDown={true}>
+                <img src={logo} alt='Logo' className={classes.logo} />
+                <br />
+                <span style={{ fontStyle: 'italic', color: 'grey' }}>
+                  World mood map
+                </span>
+              </Hidden>
             </Grid>
           </Grid>
         </Toolbar>
