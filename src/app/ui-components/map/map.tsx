@@ -86,11 +86,11 @@ class Map extends Component<MapProps, MapState> {
             'interpolate',
             ['linear'],
             ['get', 'sentiment'],
-            -0.0,
-            '#ff0000',
-            0.5,
+            -0.2,
+            'red',
+            0,
             'yellow',
-            0.7,
+            0.2,
             'green'
           ],
           // 'circle-radius': {
