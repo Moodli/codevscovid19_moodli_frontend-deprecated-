@@ -25,8 +25,18 @@ const Index = ({ classes }) => {
             )
           );
         },
-        // tslint:disable-next-line: no-console
-        e => console.error
+        () => {
+          // show Zurich
+          setCenter(
+            GeoJSON.parse(
+              {
+                lat: 47.37,
+                lng: 8.54
+              },
+              { Point: ['lat', 'lng'] }
+            )
+          );
+        }
       );
     }
     return;
