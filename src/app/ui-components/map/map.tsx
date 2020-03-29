@@ -45,7 +45,6 @@ class Map extends Component<MapProps, MapState> {
       center: geoPoint,
       zoom: 1
     });
-    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -53,8 +52,9 @@ class Map extends Component<MapProps, MapState> {
         },
         trackUserLocation: true
       }),
-      'bottom-right'
+      'top-left'
     );
+    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
     map.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -78,7 +78,7 @@ class Map extends Component<MapProps, MapState> {
       });
 
       map.addLayer({
-        id: 'moods-circles',
+        id: 'points',
         type: 'circle',
         source: 'points',
         paint: {
@@ -93,24 +93,27 @@ class Map extends Component<MapProps, MapState> {
             0.2,
             'green'
           ],
-          // 'circle-radius': {
-          //   base: 1.75,
-          //   stops: [
-          //     [12, 2],
-          //     [22, 180]
-          //   ]
-          // },
           'circle-opacity': 0.5
-          // 'circle-radius': [
-          //   'interpolate',
-          //   ['linear'],
-          //   ['get', 'sentiment'],
-          //   6,
-          //   20,
-          //   8,
-          //   40
-          // ]
         }
+      });
+
+      map.on('click', 'points', (e: any) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const text = e.features[0].properties.textHuman;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML(text).addTo(map);
+      });
+
+      map.on('mouseenter', 'points', () => {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      map.on('mouseleave', 'points', () => {
+        map.getCanvas().style.cursor = '';
       });
     });
   }
@@ -120,16 +123,14 @@ class Map extends Component<MapProps, MapState> {
 
     return (
       <>
-        <div ref={this.mapRef} className={clsx('absolute', classes.map)} />
-        <div className={clsx('absolute', classes.mapOverlay)}>
+        <div ref={this.mapRef} className={clsx('fixed', classes.map)} />
+        <div className={clsx('fixed', classes.mapOverlay)}>
           <div className={classes.mapOverlayInner}>
-            <div>
-              <div className={classes.mapOverlayLegendBar} />
-              <div className={classes.mapEmojiesContainer}>
-                <span>😀</span>
-                <span>😐</span>
-                <span>🙁</span>
-              </div>
+            <div className={classes.mapOverlayLegendBar} />
+            <div className={classes.mapEmojiesContainer}>
+              <span>😀</span>
+              <span>😐</span>
+              <span>🙁</span>
             </div>
           </div>
         </div>

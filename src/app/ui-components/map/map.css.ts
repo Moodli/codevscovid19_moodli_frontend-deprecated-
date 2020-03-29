@@ -13,6 +13,9 @@ export const styles = (theme: Theme) => ({
         clear: 'left'
       }
     },
+    '& .mapboxgl-ctrl-top-left': {
+      top: '6em'
+    },
     '@media (min-width:320px)': {
       '& .mapboxgl-ctrl-top-right': {
         left: '20px'
@@ -20,36 +23,36 @@ export const styles = (theme: Theme) => ({
     }
   },
   mapOverlay: {
-    width: '150px',
+    top: '210px',
     left: '0',
-    bottom: '30px',
+    bottom: '10px',
     padding: '10px'
   },
   mapOverlayInner: {
-    backgroundColor: '#fff',
+    display: 'flex',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-    borderRadius: '3px',
-    padding: '10px',
-    marginBottom: '10px'
+    borderRadius: '3px'
   },
   mapOverlayLegendBar: {
-    height: '10px',
-    width: '100%',
-    background: 'linear-gradient(to right, green, yellow, red)'
+    borderRadius: '3px 0 0 3px',
+    height: '100px',
+    width: '6px',
+    background: 'linear-gradient(to bottom, green, yellow, red)'
   },
   mapEmojiesContainer: {
-    marginTop: '5px',
     display: 'flex',
-    alignItems: 'stretch',
+    flexFlow: 'column',
+    marginLeft: '3px',
     '& span': {
-      flex: 1,
-      textAlign: 'center'
+      flex: 1.7,
+      height: '10px'
     },
     '& span:first-child': {
-      textAlign: 'left'
+      flex: 1.7
     },
     '& span:last-child': {
-      textAlign: 'right'
+      flex: 1
     }
   }
 });

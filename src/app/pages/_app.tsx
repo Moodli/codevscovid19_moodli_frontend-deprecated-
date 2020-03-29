@@ -26,9 +26,6 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-
-    // firebase.analytics().setAnalyticsCollectionEnabled(true);
-    // firebase.analytics().logEvent('notification_received');
   }
 
   public render() {
@@ -42,25 +39,8 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <div className={classes.root}>
             <CssBaseline />
-            {/* <nav className={classes.drawer}>
-              <Hidden smUp={true} implementation='js'>
-                <Navigator
-                  PaperProps={{ style: { width: drawerWidth } }}
-                  route={router.route}
-                  variant='temporary'
-                  open={this.state.mobileOpen}
-                  onClose={this.handleDrawerToggle}
-                />
-              </Hidden>
-              <Hidden xsDown={true} implementation='css'>
-                <Navigator
-                  PaperProps={{ style: { width: drawerWidth } }}
-                  route={router.route}
-                />
-              </Hidden>
-            </nav> */}
             <div className={classes.appContent}>
-              <Header title='moodli' onDrawerToggle={this.handleDrawerToggle} />
+              <Header title='moodli' />
               <main className={classes.mainContent}>
                 <Component {...pageProps} />
               </main>

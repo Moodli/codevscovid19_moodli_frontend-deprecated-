@@ -50,26 +50,6 @@ let theme = createMuiTheme({
 theme = {
   ...theme,
   overrides: {
-    MuiDrawer: {
-      paper: {
-        backgroundColor: '#18202c'
-      }
-    },
-    MuiIconButton: {
-      root: {
-        padding: theme.spacing(1)
-      }
-    },
-    MuiTooltip: {
-      tooltip: {
-        borderRadius: 4
-      }
-    },
-    MuiDivider: {
-      root: {
-        backgroundColor: '#404854'
-      }
-    },
     MuiListItemText: {
       primary: {
         fontWeight: theme.typography.fontWeightMedium
@@ -82,21 +62,6 @@ theme = {
         '& svg': {
           fontSize: 20
         }
-      }
-    },
-    MuiButton: {
-      label: {
-        textTransform: 'none',
-        paddingLeft: spacing.l,
-        paddingRight: spacing.l
-      },
-      contained: {
-        boxShadow: 'none',
-        '&:active': {
-          boxShadow: 'none'
-        },
-        borderRadius: spacing.l,
-        fontWeight: 700
       }
     },
     MuiAvatar: {

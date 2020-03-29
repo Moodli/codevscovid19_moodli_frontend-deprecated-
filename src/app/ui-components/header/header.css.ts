@@ -5,10 +5,9 @@ const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 export const styles = (theme: Theme) => ({
   appBar: {
-    background:
-      'linear-gradient(to bottom, rgba(125,125,125,1) 0%, rgba(125,125,125, 0.50) 25%, rgba(255,255,255,0) 100%)',
     paddingTop: spacing.xs,
-    paddingLeft: spacing.xs
+    paddingLeft: spacing.xs,
+    zIndex: 2
   },
   logo: {
     maxHeight: '40px'
