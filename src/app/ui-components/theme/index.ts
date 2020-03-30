@@ -40,6 +40,9 @@ let theme = createMuiTheme({
   palette: {
     primary: {
       main: white
+    },
+    secondary: {
+      main: '#ff0000'
     }
   },
   shape: {

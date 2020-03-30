@@ -3,9 +3,11 @@ import { withStyles } from '@material-ui/styles';
 import * as GeoJSON from 'geojson';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
+import { ResponsiveDialog } from '../ui-components/dialog/dialog';
+import Header from '../ui-components/header/header';
 import { landingStyles } from '../ui-components/theme';
 
-const data = require('../dataset.json');
+const data = process.env.MOODLI_DATA || require('../dataset.json');
 const Map = dynamic(() => import('../ui-components/map/map'), { ssr: false });
 
 const Index = ({ classes }) => {
@@ -43,7 +45,11 @@ const Index = ({ classes }) => {
   }, []);
 
   return center ? (
-    <Map center={center} data={data} />
+    <div>
+      <Header title='moodli' />
+      <ResponsiveDialog />
+      <Map center={center} data={data} />
+    </div>
   ) : (
     <div className={classes.loader}>
       <Skeleton animation='wave' style={{ width: '50%' }} />

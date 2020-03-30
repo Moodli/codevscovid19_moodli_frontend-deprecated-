@@ -4,7 +4,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
 import React from 'react';
-import Header from '../ui-components/header/header';
+import firebase from '../firebase';
 import theme, { appStyles } from '../ui-components/theme';
 
 interface ImoodliAppProps {
@@ -26,6 +26,9 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
+    firebase.analytics().setAnalyticsCollectionEnabled(true);
+    firebase.analytics().logEvent('notification_received');
   }
 
   public render() {
@@ -40,7 +43,6 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
           <div className={classes.root}>
             <CssBaseline />
             <div className={classes.appContent}>
-              <Header title='moodli' />
               <main className={classes.mainContent}>
                 <Component {...pageProps} />
               </main>
@@ -50,10 +52,6 @@ class MoodliApp extends App<ImoodliAppProps, ImoodliAppState> {
       </>
     );
   }
-
-  private handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !this.state.mobileOpen }));
-  };
 }
 
 export default withRouter(withStyles(appStyles)(MoodliApp));
