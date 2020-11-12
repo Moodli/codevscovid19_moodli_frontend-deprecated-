@@ -1,3 +1,7 @@
+# Note
+
+The webapp has now changed to back-end rendering and therefore this frontend is now defunct.
+
 # Moodli
 
 Your message has sentiment.
